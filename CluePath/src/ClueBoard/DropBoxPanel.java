@@ -10,9 +10,9 @@ public class DropBoxPanel extends JPanel {
 
 	public DropBoxPanel(Board board) {
 
-		person = new JComboBox<String>();
-		room = new JComboBox<String>();
-		weapon = new JComboBox<String>();
+		person = new JComboBox();
+		room = new JComboBox();
+		weapon = new JComboBox();
 		
 		//Create panels
 		JPanel peoplePanel = new JPanel();

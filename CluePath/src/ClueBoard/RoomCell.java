@@ -1,5 +1,8 @@
 package ClueBoard;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 public class RoomCell extends BoardCell {
 	public enum DoorDirection {UP, DOWN, LEFT, RIGHT, NONE};
 	
@@ -41,7 +44,18 @@ public class RoomCell extends BoardCell {
 	}
 
 
-	/*public void draw() {
-		
-	}*/
+	public void draw(Graphics g, int size) {
+		if(isDoorway()) {
+			g.setColor(Color.GREEN);
+			if(doorDirection == doorDirection.UP) {
+				g.fillRect(this.getRow(), this.getCol(), size, 10);
+			} else if (doorDirection == doorDirection.DOWN) {
+				g.fillRect(this.getRow() + (size - 10), this.getCol(), size, 10);
+			} else if (doorDirection == doorDirection.LEFT) {
+				g.fillRect(this.getRow(), this.getCol(), 10, size);
+			} else if (doorDirection == doorDirection.RIGHT) {
+				g.fillRect(this.getRow(), this.getCol() + (size - 10), 10, size);
+			}
+		}
+	}
 }

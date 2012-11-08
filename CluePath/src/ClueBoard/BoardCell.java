@@ -1,5 +1,7 @@
 package ClueBoard;
 
+import java.awt.Graphics;
+
 public class BoardCell {
 	private int row;
 	private int column;
@@ -38,8 +40,8 @@ public class BoardCell {
 		column = c;
 	}
 	
-//	public void draw() {
-//		System.out.println()
-//	}
+	public void draw(Graphics g, int size) {
+		//abstract
+	}
 	
 }
