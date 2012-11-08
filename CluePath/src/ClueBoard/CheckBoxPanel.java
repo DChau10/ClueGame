@@ -18,10 +18,13 @@ public class CheckBoxPanel extends JPanel {
 		//Create panels
 		JPanel peoplePanel = new JPanel();
 		peoplePanel.setBorder(BorderFactory.createTitledBorder("People"));
+		peoplePanel.setLayout( new GridLayout(0,3));
 		JPanel roomsPanel = new JPanel();
 		roomsPanel.setBorder(BorderFactory.createTitledBorder("Rooms"));
+		roomsPanel.setLayout( new GridLayout(0,3));
 		JPanel weaponsPanel = new JPanel();
 		weaponsPanel.setBorder(BorderFactory.createTitledBorder("Weapons"));
+		weaponsPanel.setLayout( new GridLayout(0,3));
 
 		//Add people buttons to the panel
 		for (int i = 0; i < board.getCards().size(); i++) {

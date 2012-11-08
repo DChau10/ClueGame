@@ -9,7 +9,7 @@ public class DetectivePanel extends JFrame{
 	public DetectivePanel(Board board) {
 
 
-		setSize(new Dimension(800, 1000));
+		setSize(new Dimension(520, 800));
 		setTitle("Detective Panel");
 		setLayout(new BorderLayout());
 		
