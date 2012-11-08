@@ -48,13 +48,13 @@ public class RoomCell extends BoardCell {
 		if(isDoorway()) {
 			g.setColor(Color.GREEN);
 			if(doorDirection == doorDirection.UP) {
-				g.fillRect(this.getRow(), this.getCol(), size, 10);
+				g.fillRect(this.getRow() * size, this.getCol() * size, size, 10);
 			} else if (doorDirection == doorDirection.DOWN) {
-				g.fillRect(this.getRow() + (size - 10), this.getCol(), size, 10);
+				g.fillRect((this.getRow() + (size - 10)) * size, this.getCol() * size, size, 10);
 			} else if (doorDirection == doorDirection.LEFT) {
-				g.fillRect(this.getRow(), this.getCol(), 10, size);
+				g.fillRect(this.getRow() * size, this.getCol() * size, 10, size);
 			} else if (doorDirection == doorDirection.RIGHT) {
-				g.fillRect(this.getRow(), this.getCol() + (size - 10), 10, size);
+				g.fillRect(this.getRow() * size, (this.getCol() + (size - 10)) * size, 10, size);
 			}
 		}
 	}

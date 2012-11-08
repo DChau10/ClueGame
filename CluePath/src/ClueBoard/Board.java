@@ -78,6 +78,7 @@ public class Board {
 		reader = new FileReader(config);
 		in = new Scanner(reader);
 		while(in.hasNext()){
+			int tempRow = 0;
 			String[] temp = in.nextLine().split(",");
 			for(int i=0; i<numColumns; i++){
 				if(!rooms.containsKey(temp[i].charAt(0)) && temp[i].length() == 1){
@@ -90,12 +91,21 @@ public class Board {
 				}
 				
 				if(temp[i].equals("W")){
-					cells.add(new WalkwayCell());
+					WalkwayCell w = new WalkwayCell();
+					//set row and col for drawing
+					w.setCol(i);
+					w.setRow(tempRow);
+					cells.add(w);
 				}else{
-					cells.add(new RoomCell(temp[i]));
+					RoomCell r = new RoomCell(temp[i]);
+					//set row and col for drawing
+					r.setCol(i);
+					r.setRow(tempRow);
+					cells.add(r);
 				}
 				
 			}
+			++tempRow;
 		}
 		reader.close();
 		
