@@ -44,17 +44,17 @@ public class RoomCell extends BoardCell {
 	}
 
 
-	public void draw(Graphics g, int size) {
+	public void draw(Graphics g, int size, int x, int y) {
 		if(isDoorway()) {
 			g.setColor(Color.GREEN);
 			if(doorDirection == doorDirection.UP) {
-				g.fillRect(this.getRow() * size, this.getCol() * size, size, 10);
+				g.fillRect(x * size, y * size, size, 10);
 			} else if (doorDirection == doorDirection.DOWN) {
-				g.fillRect((this.getRow() + (size - 10)) * size, this.getCol() * size, size, 10);
+				g.fillRect(x * size, (y + (size - 10)) * size, size, 10);
 			} else if (doorDirection == doorDirection.LEFT) {
-				g.fillRect(this.getRow() * size, this.getCol() * size, 10, size);
+				g.fillRect(x * size, y * size, 10, size);
 			} else if (doorDirection == doorDirection.RIGHT) {
-				g.fillRect(this.getRow() * size, (this.getCol() + (size - 10)) * size, 10, size);
+				g.fillRect((x + (size - 10)) * size,  y * size, 10, size);
 			}
 		}
 	}

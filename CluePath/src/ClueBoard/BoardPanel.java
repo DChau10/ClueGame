@@ -10,7 +10,6 @@ public class BoardPanel extends JPanel{
 	private int rows, cols;
 	private static int cellSize = 25;
 	Board b;
-	ArrayList<Graphics> cellRects = new ArrayList<Graphics>();
 
 	public BoardPanel(Board board) {
 		rows = board.getNumRows();
@@ -25,8 +24,10 @@ public class BoardPanel extends JPanel{
 	  g.setColor(Color.DARK_GRAY);
 	  g.fillRect(0, 0, rows * cellSize, cols * cellSize);
 	  
-	  for(BoardCell c : b.getCellList()) {
-		  c.draw(g, cellSize);
+	  for(int i = 0; i < b.getCellList().size(); ++i) {
+		  int[] coordinates = b.getRowCol(i);
+		  b.getCellAt(i).draw(g, cellSize, coordinates[0], coordinates[1]);
+		  
 	  }
 	}
 

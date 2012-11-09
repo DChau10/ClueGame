@@ -40,7 +40,7 @@ public class BoardCell {
 		column = c;
 	}
 	
-	public void draw(Graphics g, int size) {
+	public void draw(Graphics g, int size, int x, int y) {
 		//abstract
 	}
 	

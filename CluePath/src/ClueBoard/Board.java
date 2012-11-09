@@ -26,13 +26,13 @@ public class Board {
 	private int numColumns;
 	private int startPosition=-1;
 
-	
+
 	private Map<Integer, LinkedList<Integer>> adjMtx = new HashMap<Integer, LinkedList<Integer>>();
 	private Stack<Integer> path = new Stack<Integer>();
 	private Set<Integer> targets = new HashSet<Integer>();
 	private Stack<Integer> doorsFound = new Stack<Integer>();
 	private Stack<Integer> removed = new Stack<Integer>();
-	
+
 	//*********************************************************
 	private Solution sol;
 	private ArrayList<Player> players;
@@ -41,12 +41,12 @@ public class Board {
 
 
 
-	
-	
+
+
 	public void loadConfigFiles(String config, String legend, String people, String deck) throws IOException, BadConfigFormatException {
 		rooms = new TreeMap<Character,String>();
 		cells = new ArrayList<BoardCell>();
-		
+
 		//Read in Legend
 		FileReader reader = new FileReader(legend);
 		Scanner in = new Scanner(reader);
@@ -57,7 +57,7 @@ public class Board {
 			rooms.put(roomChar, room);
 		}
 		reader.close();
-				
+
 		//Read in config
 		numRows = 0;
 		numColumns = 0;
@@ -74,11 +74,10 @@ public class Board {
 			}
 		}
 		reader.close();
-		
+
 		reader = new FileReader(config);
 		in = new Scanner(reader);
 		while(in.hasNext()){
-			int tempRow = 0;
 			String[] temp = in.nextLine().split(",");
 			for(int i=0; i<numColumns; i++){
 				if(!rooms.containsKey(temp[i].charAt(0)) && temp[i].length() == 1){
@@ -87,29 +86,20 @@ public class Board {
 				String doorDirections = "UDLR";
 				if(temp[i].length() == 2 && (!rooms.containsKey(temp[i].charAt(0)) || doorDirections.indexOf(temp[i].charAt(1))==-1 )){
 					throw new BadConfigFormatException("Room Character Not Found or Invalid Door Direction");
-					
+
 				}
-				
+
 				if(temp[i].equals("W")){
-					WalkwayCell w = new WalkwayCell();
-					//set row and col for drawing
-					w.setCol(i);
-					w.setRow(tempRow);
-					cells.add(w);
+					cells.add(new WalkwayCell());
 				}else{
-					RoomCell r = new RoomCell(temp[i]);
-					//set row and col for drawing
-					r.setCol(i);
-					r.setRow(tempRow);
-					cells.add(r);
+					cells.add(new RoomCell(temp[i]));
 				}
-				
+
 			}
-			++tempRow;
 		}
 		reader.close();
-		
-		
+
+
 		//******************************************************
 		//loading in people from file
 		int x = 0;
@@ -125,13 +115,13 @@ public class Board {
 			x++;
 		}
 		reader.close();
-		
+
 		//loading cards from file
 		x = 1;
 		reader = new FileReader(deck);
 		in = new Scanner(reader);
 		cards = new ArrayList<Card>();
-		
+
 		while (in.hasNextLine()) {
 			if (x <= 6) {
 				cards.add(new Card(in.nextLine(), Card.CardType.PERSON));
@@ -144,7 +134,7 @@ public class Board {
 		}
 		reader.close();
 	}
-	
+
 	public void printTest() {
 		for (int i = 0; i < cards.size(); i++) {
 			System.out.println(cards.get(i).getCardName());
@@ -154,7 +144,7 @@ public class Board {
 			System.out.println(players.get(i).getName());
 		}
 	}
-	
+
 	public int calcIndex(double testRow, double testCol) {
 		double index = numColumns*testRow+testCol;
 		if( (int) index>= numColumns*numRows || (int) index <0){
@@ -162,31 +152,31 @@ public class Board {
 		}
 		return (int) index;
 	}
-	
+
 	public RoomCell GetRoomCellAt(int row, int column){
 		return (RoomCell) cells.get(calcIndex(row,column));
 	}
-	
+
 	public Map<Character, String> getRooms() {
-		
+
 		return rooms;
 	}
-	
+
 	public int getNumRows() {
 		return numRows;
 	}
-	
+
 	public int getNumColumns() {
 		return numColumns;
 	}
-	
+
 	public BoardCell getCellAt(int cell) {
 		return cells.get(cell);
 	}
-	
+
 	//calculate adjacency list for a specific cell
 	public void calcAdjacencies(int row, int col){
-	
+
 		LinkedList<Integer> list = new LinkedList<Integer>();
 		adjMtx.put(calcIndex(row,col), list);
 		for(int i = 0; i <= 1; i++){
@@ -195,7 +185,7 @@ public class Board {
 			if(testIndex != -1 && testIndex != startPosition && !path.contains(testIndex) && (cells.get((int) testIndex).isRoom() != true || cells.get((int) testIndex).isDoorway() == true)){
 				adjMtx.get(calcIndex(row,col)).add((int) testIndex);
 			}
-			
+
 		}
 		for(int j=0; j <=1 ; j++){
 			double testCol = col+ java.lang.Math.pow(-1.0, j);
@@ -206,54 +196,54 @@ public class Board {
 			}
 			double testIndex = calcIndex(row, testCol);
 			if((testIndex != -1 && testIndex != startPosition && !path.contains(testIndex) && (cells.get((int) testIndex).isRoom() != true) || cells.get((int) testIndex).isDoorway() == true)){
-		
+
 				adjMtx.get(calcIndex(row,col)).add((int) testIndex);
 			}
 		}
-		
+
 		for(int r=0; r<list.size(); r++){
 			if(cells.get(calcIndex(row,col)).isDoorway()){
 				if(( (RoomCell) cells.get(calcIndex (row,col) )).getDoorDirection() == DoorDirection.UP){
 					if( getRowCol(list.get(r))[0] != col){
-						
+
 						list.remove(list.get(r));
 						r--;
 					}
-					
+
 				}
 				if(( (RoomCell) cells.get(calcIndex (row,col) )).getDoorDirection() == DoorDirection.LEFT){
 					if( getRowCol(list.get(r))[0] != col-1){
-						
+
 						list.remove(list.get(r));
 						r--;
 					}
-					
+
 				}
 				if(( (RoomCell) cells.get(calcIndex (row,col) )).getDoorDirection() == DoorDirection.RIGHT){
 					if( getRowCol(list.get(r))[0] != col-1){
-				
+
 						list.remove(list.get(r));
 						r--;
 					}
-					
+
 				}
 				if(( (RoomCell) cells.get(calcIndex (row,col) )).getDoorDirection() == DoorDirection.DOWN){
 					if( getRowCol(list.get(r))[0] != col){
-						
+
 						list.remove(list.get(r));
 						r--;
 					}
-					
+
 				}
 			}
 		}
 	}
-	
+
 	//***************************
 	public void printTargets() {
 		Set<BoardCell> test = new HashSet<BoardCell>();
 		calcTargets(calcIndex(6, 0), 2);
-		
+
 		for (Integer key : targets)
 			System.out.println(key);
 	}
@@ -261,26 +251,26 @@ public class Board {
 	//calculate targets for given cell index and number of steps.
 	public void calcTargets(int position, int steps){
 
-		
+
 		path.push(position);
-		
+
 		//Record first position to test against starting on a door 
 		if(startPosition==-1){
 			startPosition=position;
 		}
-		
+
 		//Calc adjacencies first so that we can getAdjecencies
 		calcAdjacencies(getRowCol(position)[1], getRowCol(position)[0]);
-	
-		
-	
+
+
+
 		if (steps == 0) {
 			targets.add(position);
 			path.pop();
 			return;
 		}	
-		
-		
+
+
 		for (int i : adjMtx.get(position)) {
 			//If a doorway is found add it to targets
 			if (cells.get(i).isDoorway() && i!= startPosition) {
@@ -290,28 +280,28 @@ public class Board {
 				calcTargets(i, steps - 1);
 			}
 		}
-		
+
 		path.pop();
-			
+
 	}
-	
+
 	//clears targets
 	public void clearTargets(){
 		targets.clear();
 	}
-	
+
 	public HashSet<BoardCell> getTargets(){
 		startPosition=-1;
 		Set<BoardCell> temp = new HashSet<BoardCell>();
 		//path.clear();
-		
 
-		
+
+
 		startPosition=-1;
 		for(int i:doorsFound){
 			targets.add(i);
 		}
-		
+
 		removed.clear();
 		doorsFound.clear();
 		for(int i:targets){
@@ -319,13 +309,13 @@ public class Board {
 				temp.add(cells.get(i));
 			}
 		}
-		
-		
+
+
 		path.clear();
 		targets.clear();
 		return (HashSet<BoardCell>) temp;
 	}
-	
+
 	//gets the adjacency list for a cell
 	public LinkedList<Integer> getAdjList(int location){
 		//Check if tile is in a room
@@ -336,7 +326,7 @@ public class Board {
 		calcAdjacencies(getRowCol(location)[1],getRowCol(location)[0]);
 		return adjMtx.get(location);
 	}
-	
+
 
 	//returns the row and column of an index contained in an array, where a[0] = column, a[1] = row
 	public int[] getRowCol(double testIndex){
@@ -346,22 +336,22 @@ public class Board {
 		temp[1] = (int) (testIndex/numRows);
 		return temp;
 	}
-	
+
 	//***********************************************
 	public void selectAnswer() {
-		
+
 	}
-	
+
 	public void deal(ArrayList<String> cardList) {
-		
+
 	}
-	
+
 	public void deal() {
 		//shuffle player cards
 		long seed = System.nanoTime();		
 		Collections.shuffle(cards, new Random(seed));
-		
-		
+
+
 		//put answer into solution, remove solution cards from deck 
 		int a = 0, b = 0, c = 0;
 		for (int i = 0; i < cards.size(); i++) {
@@ -394,7 +384,7 @@ public class Board {
 				person = solution.get(i).getCardName();
 		}
 		sol = new Solution(person, room, weapon);
-		
+
 		//deal player cards
 		int x = 0, z = 0;		
 		for (int i = 0; i < cards.size(); i += players.size()) {
@@ -408,13 +398,13 @@ public class Board {
 			}
 		}
 	}
-	
+
 	public void setSolution(String person, String room, String weapon) {
 		sol.setPerson(person);
 		sol.setRoom(room);
 		sol.setWeapon(weapon);
 	}
-	
+
 	public void printPlayerCards() {
 		for (int i = 0; i < players.size(); i++) {
 			System.out.println("[ " + players.get(i).getName() + " ]");
@@ -424,45 +414,45 @@ public class Board {
 			System.out.println("---------------------------");
 		}
 	}
-	
+
 	public boolean checkAccusation(String person, String room, String weapon){
 		if (sol.getPerson().equalsIgnoreCase(person) && sol.getRoom().equalsIgnoreCase(room) && sol.getWeapon().equalsIgnoreCase(weapon))
 			return true;
 		return false;
 	}
-	
+
 	public void handleSuggestion(String person, String room, String weapon) {
-		
+
 	}
-	
+
 	public void setPlayers(ArrayList<Player> player) {
 		players = player;
 	}
-	
+
 	public Player getPlayer(int i) {
 		return players.get(i);
 	}
-	
+
 	public ArrayList<BoardCell> getCellList() {
 		return cells;
 	}
-	
+
 	public ArrayList<Card> getCards() {
 		return cards;
 	}
-	
+
 	public ArrayList<Player> getPlayerList() {
 		return players;
 	}
-	
+
 	public static void main(String[] args) throws IOException, BadConfigFormatException {
 		Board board = new Board();
 		board.loadConfigFiles("config.txt", "legend.txt", "players.txt", "cards.txt");
 
 		board.deal();
-	//	board.printPlayerCards();
+		//	board.printPlayerCards();
 		board.printTargets();
-		
+
 		ComputerPlayer test_player = (ComputerPlayer) board.getPlayer(1);
 		board.calcTargets(board.calcIndex(6, 0), 2);
 		int loc_5_1Tot = 0;
@@ -481,7 +471,7 @@ public class Board {
 			else
 				fail("Invalid target selected");
 		}
-		
+
 		System.out.println("o, 3: " + loc_5_1Tot);
 		System.out.println("4, 0: " + loc_4_0Tot);
 		System.out.println("6, 2: " + loc_6_2Tot);
