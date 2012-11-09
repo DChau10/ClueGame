@@ -50,11 +50,11 @@ public class RoomCell extends BoardCell {
 			if(doorDirection == doorDirection.UP) {
 				g.fillRect(x * size, y * size, size, 10);
 			} else if (doorDirection == doorDirection.DOWN) {
-				g.fillRect(x * size, (y + (size - 10)) * size, size, 10);
+				g.fillRect(x * size, (y * size) + (size - 10), size, 10);
 			} else if (doorDirection == doorDirection.LEFT) {
 				g.fillRect(x * size, y * size, 10, size);
 			} else if (doorDirection == doorDirection.RIGHT) {
-				g.fillRect((x + (size - 10)) * size,  y * size, 10, size);
+				g.fillRect((x * size) + (size - 10) ,  y * size, 10, size);
 			}
 		}
 	}
