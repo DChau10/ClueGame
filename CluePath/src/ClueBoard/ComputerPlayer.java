@@ -1,5 +1,6 @@
 package ClueBoard;
 
+import java.awt.Graphics;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -26,7 +27,6 @@ public class ComputerPlayer extends Player{
 		super(name, color, location);
 		lastRoomVisted = location;
 		cell = startCell;
-		// TODO Auto-generated constructor stub
 	}
 	
 	public void move(int point, BoardCell moveCell) {
@@ -118,5 +118,4 @@ public class ComputerPlayer extends Player{
 			}
 		}			
 	}
-	
 }

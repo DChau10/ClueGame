@@ -1,5 +1,7 @@
 package ClueBoard;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -69,6 +71,29 @@ public abstract class Player {
 	
 	public BoardCell lastSeen() {
 		return new BoardCell();
+	}
+	
+	
+	public void draw(Graphics g, int size, int x, int y) {
+		this.chooseColor(g);
+		g.fillOval(x * size, y * size, size, size);
+	}
+	
+	public void chooseColor(Graphics g) {
+		if(this.getColor().equals("blue")) {
+			g.setColor(Color.BLUE);
+		}else if(this.getColor().equals("brown")) {
+			g.setColor(Color.BLACK);
+		}else if(this.getColor().equals("white")) {
+			g.setColor(Color.WHITE);
+		}else if(this.getColor().equals("purple")) {
+			g.setColor(Color.MAGENTA);
+		}else if(this.getColor().equals("green")) {
+			g.setColor(Color.GREEN);
+		}else if(this.getColor().equals("red")) {
+			g.setColor(Color.RED);
+		}
+			
 	}
 	
 }
