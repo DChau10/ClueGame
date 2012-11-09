@@ -21,7 +21,10 @@ public class DropBoxPanel extends JPanel {
 		roomsPanel.setBorder(BorderFactory.createTitledBorder("Rooms Guess"));
 		JPanel weaponsPanel = new JPanel();
 		weaponsPanel.setBorder(BorderFactory.createTitledBorder("Weapons Guess"));
-
+		
+		person.addItem("Unsure");
+		room.addItem("Unsure");
+		weapon.addItem("Unsure");
 		//Add people buttons to the panel
 		for (int i = 0; i < board.getCards().size(); i++) {
 			if (board.getCards().get(i).getCardtype() == Card.CardType.PERSON)
