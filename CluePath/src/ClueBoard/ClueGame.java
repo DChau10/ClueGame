@@ -9,10 +9,7 @@ public class ClueGame extends JFrame {
 	
 	
 	public ClueGame(Board board) {
-		DetectivePanel panel = new DetectivePanel(board);
-		panel.setVisible(true);
-		panel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		GameFrame game = new GameFrame(board);
 		game.setVisible(true);
 		game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
