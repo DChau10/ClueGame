@@ -13,7 +13,7 @@ public class WalkwayCell extends BoardCell {
 		return true;
 	}
 	
-	public void draw(Graphics g, int size, int x, int y) {
+	public void draw(Graphics g, int size, int x, int y, Board board) {
 		//draw yellow filled
 		g.setColor(Color.YELLOW);
 		g.fillRect(x * size, y * size, size, size);

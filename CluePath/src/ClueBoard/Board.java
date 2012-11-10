@@ -83,7 +83,7 @@ public class Board {
 				if(!rooms.containsKey(temp[i].charAt(0)) && temp[i].length() == 1){
 					throw new BadConfigFormatException("Room Character Not Found");
 				}
-				String doorDirections = "UDLR";
+				String doorDirections = "UDLRN";
 				if(temp[i].length() == 2 && (!rooms.containsKey(temp[i].charAt(0)) || doorDirections.indexOf(temp[i].charAt(1))==-1 )){
 					throw new BadConfigFormatException("Room Character Not Found or Invalid Door Direction");
 
@@ -444,6 +444,9 @@ public class Board {
 	public ArrayList<Player> getPlayerList() {
 		return players;
 	}
+
+	public String getRoomName(char key) { return (String)rooms.get(Character.valueOf(key)); }
+
 
 	public static void main(String[] args) throws IOException, BadConfigFormatException {
 		Board board = new Board();

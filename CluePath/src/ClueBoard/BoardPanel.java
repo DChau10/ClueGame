@@ -27,7 +27,7 @@ public class BoardPanel extends JPanel{
 	  //Draw cells
 	  for(int i = 0; i < b.getCellList().size(); ++i) {
 		  int[] coordinates = b.getRowCol(i);
-		  b.getCellAt(i).draw(g, cellSize, coordinates[0], coordinates[1]);  
+		  b.getCellAt(i).draw(g, cellSize, coordinates[0], coordinates[1], b);  
 	  }
 	  
 	  //Draw Players
