@@ -20,7 +20,6 @@ public class ClueGame extends JFrame {
 		board.loadConfigFiles("config.txt", "legend.txt", "players.txt", "cards.txt");
 		
 		ClueGame game = new ClueGame(board);
-		board.deal();
 	}
 		
 		

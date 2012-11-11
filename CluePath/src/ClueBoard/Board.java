@@ -348,7 +348,7 @@ public class Board {
 
 	public void deal() {
 		//shuffle player cards
-		long seed = System.nanoTime();		
+		long seed = System.nanoTime()*System.currentTimeMillis();		
 		Collections.shuffle(cards, new Random(seed));
 
 

@@ -10,18 +10,26 @@ import javax.swing.*;
 public class GameFrame extends JFrame{
 	private DetectivePanel panel;
 	public GameFrame(Board board) {
+		//Create DetectivePanel
 		panel = new DetectivePanel(board);
+		//Create the Menu Bar
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		menuBar.add(createFileMenu());
 
-
-		setSize(new Dimension(700, 800));
+		//Set title and layout for main window
+		setSize(new Dimension(720, 800));
 		setTitle("Clue");
 		setLayout(new BorderLayout());
 		setVisible(true);
+		//Add the board to the window
 		BoardPanel bPanel = new BoardPanel(board);
 		add(bPanel, BorderLayout.CENTER);
+		//Deal cards
+		board.deal();
+		//Add the Player's cards to the window
+		PlayerDisplay ppanel = new PlayerDisplay(board.getPlayer(0));
+		add(ppanel, BorderLayout.EAST);
 
 	}
 

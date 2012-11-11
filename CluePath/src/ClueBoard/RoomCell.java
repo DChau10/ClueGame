@@ -50,7 +50,7 @@ public class RoomCell extends BoardCell {
 
 	public void draw(Graphics g, int size, int x, int y, Board board) {
 		if (drawRoomName == true) {
-			g.setColor(Color.BLUE);
+			g.setColor(Color.WHITE);
 			g.drawString(board.getRoomName(getRoomInitial()), x*size, y*size);
 		}
 		else if (isDoorway()) {
