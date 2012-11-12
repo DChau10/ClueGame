@@ -18,7 +18,7 @@ public class GameFrame extends JFrame{
 		menuBar.add(createFileMenu());
 
 		//Set title and layout for main window
-		setSize(new Dimension(720, 800));
+		setSize(new Dimension(720, 780));
 		setTitle("Clue");
 		setLayout(new BorderLayout());
 		setVisible(true);
