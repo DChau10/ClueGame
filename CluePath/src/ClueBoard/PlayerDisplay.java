@@ -13,7 +13,7 @@ public class PlayerDisplay extends JPanel {
 	public PlayerDisplay(Player human_player) {
 		this.human_player = human_player;
 		setLayout(new GridLayout(6,1));
-		TitledBorder title = BorderFactory.createTitledBorder( BorderFactory.createEtchedBorder(0), "My Cards");
+		TitledBorder title = BorderFactory.createTitledBorder( BorderFactory.createEmptyBorder(), "My Cards");
 		title.setTitleJustification(2);
 		setBorder(title);
 		

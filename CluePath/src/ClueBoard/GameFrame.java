@@ -30,6 +30,10 @@ public class GameFrame extends JFrame{
 		//Add the Player's cards to the window
 		PlayerDisplay ppanel = new PlayerDisplay(board.getPlayer(0));
 		add(ppanel, BorderLayout.EAST);
+		//Add the game control panel to window
+		GameControlPanel gcpanel = new GameControlPanel();
+		add(gcpanel, BorderLayout.SOUTH);
+		
 
 	}
 
