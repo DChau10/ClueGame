@@ -42,6 +42,7 @@ public class ClueGame extends JFrame {
 		board.loadConfigFiles("config.txt", "legend.txt", "players.txt", "cards.txt");
 		
 		ClueGame game = new ClueGame(board);
+		JOptionPane.showMessageDialog(game,"You are Professor Plum. Press Next Player to begin play", "Welcome to Clue", 1);
 	}
 		
 }
