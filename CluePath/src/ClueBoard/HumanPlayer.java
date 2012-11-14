@@ -8,4 +8,8 @@ public class HumanPlayer extends Player{
 		super(name, color, location);
 		// TODO Auto-generated constructor stub
 	}	
+	
+	public void takeTurn(Graphics g) {
+		
+	}
 }

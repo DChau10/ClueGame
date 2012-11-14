@@ -29,12 +29,14 @@ public class ComputerPlayer extends Player{
 		cell = startCell;
 	}
 	
-	public void move(int point, BoardCell moveCell) {
-		lastRoomVisted = location;
-		location = point;	
+	public void move(Board b, BoardCell moveCell) {
+		int moveLocation = b.getCellList().indexOf(moveCell);
 		
-		lastRoomCell = cell;
-		cell = moveCell;		
+		if(b.getCellAt(location).isDoorway()) {
+			lastRoomVisted = location;
+		}
+		
+		location = moveLocation;
 	}
 	
 	public BoardCell pickLocation(HashSet<BoardCell> hashSet, ArrayList<BoardCell> cells) {
@@ -82,13 +84,13 @@ public class ComputerPlayer extends Player{
 			x++;
 		}
 	}
+	
 	public ArrayList<Card> createSuggestion() {
 		ArrayList<Card> suggestion = new ArrayList<Card>();
 		updateSeen();		
 		
 		long seed = System.nanoTime();		
 		Collections.shuffle(deck, new Random(seed));
-		
 		
 		//put answer into solution, remove solution cards from deck 
 		int a = 0, b = 0, c = 0;
@@ -117,5 +119,10 @@ public class ComputerPlayer extends Player{
 				deck.remove(i);
 			}
 		}			
+	}
+	
+	public void takeTurn(Board b, int dieRoll) {
+		b.calcTargets(this.location, dieRoll);
+		this.move(b, this.pickLocation(b.getTargets(), b.getCellList()));
 	}
 }

@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class GameFrame extends JFrame{
+	private BoardPanel bPanel;
 	private DetectivePanel panel;
 	public GameFrame(Board board) {
 		//Create DetectivePanel
@@ -35,6 +36,10 @@ public class GameFrame extends JFrame{
 		add(gcpanel, BorderLayout.SOUTH);
 		
 
+	}
+	
+	private BoardPanel getBoardPanel() {
+		return this.bPanel;
 	}
 
 	private JMenu createFileMenu() {

@@ -96,4 +96,13 @@ public abstract class Player {
 			
 	}
 	
+	public void takeTurn() {
+		//abstract
+	}
+
+	public void createSuggestion() {
+		//abstract
+		
+	}
+	
 }
