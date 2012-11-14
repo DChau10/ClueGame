@@ -392,7 +392,7 @@ public class GameSetupTests {
 	        int knife = 0;
 	        for(int i = 0; i < 100; i++)
 	        {
-	        	suggest = p1.createSuggestion();
+	        	p1.createSuggestion();
 	            Card returnCard = board.getPlayerList().get(0).disproveSuggestion(suggest.get(0), suggest.get(1), suggest.get(2));
 	            if (!(returnCard == null)) {
 		            if(returnCard.equals(mustardCard))

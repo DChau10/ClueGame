@@ -29,10 +29,10 @@ public class GameFrame extends JFrame{
 		//Deal cards
 		board.deal();
 		//Add the Player's cards to the window
-		PlayerDisplay ppanel = new PlayerDisplay(board.getPlayer(0));
+		PlayerDisplay ppanel = new PlayerDisplay((HumanPlayer) board.getPlayer(0));
 		add(ppanel, BorderLayout.EAST);
 		//Add the game control panel to window
-		GameControlPanel gcpanel = new GameControlPanel();
+		GameControlPanel gcpanel = new GameControlPanel(board);
 		add(gcpanel, BorderLayout.SOUTH);
 		
 

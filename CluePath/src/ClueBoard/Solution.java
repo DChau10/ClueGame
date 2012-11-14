@@ -1,7 +1,7 @@
 package ClueBoard;
 
 public class Solution {
-	private String person, room, weapon;
+	public String person, room, weapon;
 	
 	public Solution(String person, String room, String weapon) {
 		this.person = person;

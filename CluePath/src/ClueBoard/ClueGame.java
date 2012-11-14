@@ -19,21 +19,21 @@ public class ClueGame extends JFrame {
 	}
 	
 	//The oneTurn function handles the moving of players and the making of suggestions/accusations
-	public void oneTurn(Board b) {
-		//Player counter chooses next player each turn, 0 indicates human player
-		if(playerCounter == 0) {
-			//While (next player is not pressed) >>insert button variable
-			while(true) {
-				b.getPlayer(0).takeTurn();
-			}
-		}else {
-			b.getPlayer(playerCounter).takeTurn();
-			if(b.getCellAt(b.getPlayer(playerCounter).location).isDoorway()) {
-				 b.getPlayer(playerCounter).createSuggestion();
-			}
-		}
-		
-	}
+//	public void oneTurn(Board b) {
+//		//Player counter chooses next player each turn, 0 indicates human player
+//		if(playerCounter == 0) {
+//			//While (next player is not pressed) >>insert button variable
+//			while(true) {
+//				b.getPlayer(0).takeTurn();
+//			}
+//		}else {
+//			b.getPlayer(playerCounter).takeTurn();
+//			if(b.getCellAt(b.getPlayer(playerCounter).location).isDoorway()) {
+//				 b.getPlayer(playerCounter).createSuggestion();
+//			}
+//		}
+//		
+//	}
 	
 	
 	

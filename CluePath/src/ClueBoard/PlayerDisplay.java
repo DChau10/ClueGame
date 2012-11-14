@@ -10,7 +10,7 @@ public class PlayerDisplay extends JPanel {
 	private JTextField myrooms;
 	private JTextField myweapons;
 	
-	public PlayerDisplay(Player human_player) {
+	public PlayerDisplay(HumanPlayer human_player) {
 		this.human_player = human_player;
 		setLayout(new GridLayout(6,1));
 		TitledBorder title = BorderFactory.createTitledBorder( BorderFactory.createEmptyBorder(), "My Cards");

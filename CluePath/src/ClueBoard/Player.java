@@ -100,9 +100,6 @@ public abstract class Player {
 		//abstract
 	}
 
-	public void createSuggestion() {
-		//abstract
-		
-	}
+
 	
 }

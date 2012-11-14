@@ -38,6 +38,7 @@ public class Board {
 	private ArrayList<Player> players;
 	private ArrayList<Card> cards;
 	private ArrayList<Card> solution = new ArrayList<Card>();
+	private HumanPlayer human; 
 
 
 
@@ -108,8 +109,10 @@ public class Board {
 		in = new Scanner(reader);
 		while (in.hasNextLine()) {
 			String[] line = in.nextLine().split("\\, ");
-			if (x == 0)
+			if (x == 0) {
 				players.add(new HumanPlayer(line[0], line[1], Integer.parseInt(line[2])));
+				setHuman( new HumanPlayer(line[0], line[1], Integer.parseInt(line[2])));
+			}
 			else
 				players.add(new ComputerPlayer(line[0], line[1], Integer.parseInt(line[2]), cells.get(Integer.parseInt(line[2]))));
 			x++;
@@ -241,7 +244,7 @@ public class Board {
 
 	//***************************
 	public void printTargets() {
-		Set<BoardCell> test = new HashSet<BoardCell>();
+		
 		calcTargets(calcIndex(6, 0), 2);
 
 		for (Integer key : targets)
@@ -289,7 +292,7 @@ public class Board {
 	public void clearTargets(){
 		targets.clear();
 	}
-
+	//Changed HashSet to Set
 	public HashSet<BoardCell> getTargets(){
 		startPosition=-1;
 		Set<BoardCell> temp = new HashSet<BoardCell>();
@@ -447,7 +450,21 @@ public class Board {
 
 	public String getRoomName(char key) { return (String)rooms.get(Character.valueOf(key)); }
 
-
+	public void highlightTargets() {
+		if (this.targets != null) {
+			for (BoardCell cell : this.getTargets()) {
+				cell.setHighlight(true);
+			}
+		}
+	}
+	
+	public HumanPlayer getHuman() {
+		return human;
+	}
+	public void setHuman(HumanPlayer h) {
+		this.human = h;
+	}
+	
 	public static void main(String[] args) throws IOException, BadConfigFormatException {
 		Board board = new Board();
 		board.loadConfigFiles("config.txt", "legend.txt", "players.txt", "cards.txt");

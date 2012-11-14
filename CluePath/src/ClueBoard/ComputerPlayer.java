@@ -17,7 +17,7 @@ public class ComputerPlayer extends Player{
 	private BoardCell lastRoomCell;
 	private ArrayList<Card> deck;
 	private BoardCell cell;
-
+	private Solution suggestion = new Solution("","","");
 	
 
 	private int lastRoomVisted;
@@ -29,6 +29,7 @@ public class ComputerPlayer extends Player{
 		cell = startCell;
 	}
 	
+
 	public void move(Board b, BoardCell moveCell) {
 		int moveLocation = b.getCellList().indexOf(moveCell);
 		
@@ -84,32 +85,32 @@ public class ComputerPlayer extends Player{
 			x++;
 		}
 	}
-	
-	public ArrayList<Card> createSuggestion() {
-		ArrayList<Card> suggestion = new ArrayList<Card>();
+
+	public void createSuggestion() {
+
+		ArrayList<Card> sugg = new ArrayList<Card>();
 		updateSeen();		
 		
 		long seed = System.nanoTime();		
 		Collections.shuffle(deck, new Random(seed));
-		
-		//put answer into solution, remove solution cards from deck 
+		 
 		int a = 0, b = 0, c = 0;
 		for (int i = 0; i < deck.size(); i++) {
 			if (deck.get(i).getCardtype() == Card.CardType.PERSON && a == 0) {
 				System.out.println(deck.get(i).getCardName());
-				suggestion.add(deck.get(i));				
+				sugg.add(deck.get(i));				
 				a++;
 			} else if (deck.get(i).getCardtype() == Card.CardType.ROOM && b == 0) {
 				System.out.println(deck.get(i).getCardName());
-				suggestion.add(deck.get(i));
+				sugg.add(deck.get(i));
 				b++;
 			} else if (deck.get(i).getCardtype() == Card.CardType.WEAPON && c == 0) {
 				System.out.println(deck.get(i).getCardName());
-				suggestion.add(deck.get(i));
+				sugg.add(deck.get(i));
 				c++;
 			} 
 		}
-		return suggestion;
+		suggestion = new Solution(sugg.get(0).getCardName(),sugg.get(1).getCardName(),sugg.get(2).getCardName());
 	}
 	
 	public void updateSeen() {

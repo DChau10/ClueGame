@@ -5,7 +5,7 @@ import java.awt.Graphics;
 public class BoardCell {
 	private int row;
 	private int column;
-	
+	private boolean highlighted;
 
 	
 	public boolean isWalkway() {
@@ -40,8 +40,13 @@ public class BoardCell {
 		column = c;
 	}
 	
+
 	public void draw(Graphics g, int size, int x, int y, Board board) {
 		//abstract
+	}
+
+	public void setHighlight(boolean b) {
+		this.highlighted = b;
 	}
 	
 }
